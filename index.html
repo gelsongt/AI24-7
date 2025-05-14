@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeSync - AI-Powered Trading Agents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(-45deg, #1e293b, #0f172a, #1e40af, #1e3a8a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .agent-card:hover .agent-overlay {
+            opacity: 1;
+        }
+        
+        .tradingview-widget-container iframe {
+            border-radius: 0.5rem;
+        }
+        
+        .blink {
+            animation: blink-animation 1.5s steps(5, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to { visibility: hidden; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-gray-800/80 backdrop-blur-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-robot text-blue-400 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">TradeSync</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Agents</a>
+                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strategies</a>
+                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Analytics</a>
+                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Community</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none">
+                            <span class="sr-only">Notifications</span>
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <div class="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">U</div>
+                                <span class="ml-2 text-sm font-medium">User</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16 pb-12">
+        <!-- Hero Section -->
+        <div class="gradient-bg py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">AI Trading Agents</span>
+                    <span class="block text-white">That Work For You 24/7</span>
+                </h1>
+                <p class="mt-3 max-w-md mx-auto text-lg text-gray-300 sm:text-xl md:mt-5 md:max-w-3xl">
+                    Deploy intelligent trading algorithms that analyze markets, execute trades, and maximize your profits while you sleep.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="rounded-md shadow">
+                        <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                            Get Started <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    <div class="ml-3 rounded-md shadow">
+                        <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-gray-700">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-500/10 p-3 rounded-lg">
+                                <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dt class="text-sm font-medium text-gray-400 truncate">Active Agents</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-white">1,248</div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-green-400">
+                                        <i class="fas fa-caret-up mr-1"></i> 12%
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-purple-500/10 p-3 rounded-lg">
+                                <i class="fas fa-coins text-purple-400 text-xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dt class="text-sm font-medium text-gray-400 truncate">Total Profit</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-white">$4.2M</div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-green-400">
+                                        <i class="fas fa-caret-up mr-1"></i> 8.5%
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-500/10 p-3 rounded-lg">
+                                <i class="fas fa-exchange-alt text-green-400 text-xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dt class="text-sm font-medium text-gray-400 truncate">Daily Trades</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-white">24,736</div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-green-400">
+                                        <i class="fas fa-caret-up mr-1"></i> 3.2%
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800/50 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-yellow-500/10 p-3 rounded-lg">
+                                <i class="fas fa-users text-yellow-400 text-xl"></i>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dt class="text-sm font-medium text-gray-400 truncate">Community</dt>
+                                <dd class="flex items-baseline">
+                                    <div class="text-2xl font-semibold text-white">8,452</div>
+                                    <div class="ml-2 flex items-baseline text-sm font-semibold text-green-400">
+                                        <i class="fas fa-caret-up mr-1"></i> 5.7%
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading View & Agent Dashboard -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Market Overview -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-gray-700">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-white">Market Overview</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-sm rounded-md bg-blue-600 text-white">BTC/USD</button>
+                                <button class="px-3 py-1 text-sm rounded-md bg-gray-700 text-gray-300 hover:bg-gray-600">ETH/USD</button>
+                                <button class="px-3 py-1 text-sm rounded-md bg-gray-700 text-gray-300 hover:bg-gray-600">SOL/USD</button>
+                            </div>
+                        </div>
+                        <div class="tradingview-widget-container h-96">
+                            <!-- TradingView Widget Placeholder -->
+                            <div class="bg-gray-700/50 rounded-lg h-full flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-bar text-4xl text-blue-400 mb-2"></i>
+                                    <p class="text-gray-300">Live Market Chart</p>
+                                    <p class="text-sm text-gray-500 mt-2">BTC/USD: $42,856.32 <span class="text-green-400">+2.4%</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-gray-700">
+                        <h2 class="text-xl font-bold text-white mb-4">Recent Activity</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                    <i class="fas fa-robot text-blue-400"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="flex items-center">
+                                        <p class="text-sm font-medium text-white">ArbitrageBot-7</p>
+                                        <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-900/50 text-green-400">LIVE</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Executed BUY order for BTC at $42,812.34</p>
+                                    <p class="text-xs text-gray-500 mt-1">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center">
+                                    <i class="fas fa-bolt text-purple-400"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="flex items-center">
+                                        <p class="text-sm font-medium text-white">FlashTrader-X</p>
+                                        <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-900/50 text-green-400">LIVE</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Detected pattern on ETH/USD 5m chart</p>
+                                    <p class="text-xs text-gray-500 mt-1">7 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-500/10 flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-yellow-400"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="flex items-center">
+                                        <p class="text-sm font-medium text-white">RiskManager</p>
+                                        <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-gray-900/50 text-gray-400">IDLE</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Adjusted portfolio risk parameters</p>
+                                    <p class="text-xs text-gray-500 mt-1">15 minutes ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agent Dashboard -->
+                <div class="space-y-6">
+                    <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-gray-700">
+                        <h2 class="text-xl font-bold text-white mb-4">My Agents</h2>
+                        <div class="space-y-4">
+                            <div class="bg-gray-700/30 p-4 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors duration-200">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h3 class="font-medium text-white">ArbitrageBot-7</h3>
+                                            <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-900/50 text-green-400 blink">ACTIVE</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">Cross-exchange arbitrage</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-green-400">+$1,245.67</p>
+                                        <p class="text-xs text-gray-500 mt-1">Today</p>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 rounded bg-blue-900/30 text-blue-300">BTC</span>
+                                        <span class="text-xs px-2 py-1 rounded bg-purple-900/30 text-purple-300">ETH</span>
+                                    </div>
+                                    <button class="text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-gray-300">
+                                        <i class="fas fa-cog mr-1"></i> Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-700/30 p-4 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h3 class="font-medium text-white">FlashTrader-X</h3>
+                                            <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-900/50 text-green-400">ACTIVE</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">High-frequency trading</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-green-400">+$876.42</p>
+                                        <p class="text-xs text-gray-500 mt-1">Today</p>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 rounded bg-blue-900/30 text-blue-300">BTC</span>
+                                        <span class="text-xs px-2 py-1 rounded bg-green-900/30 text-green-300">SOL</span>
+                                    </div>
+                                    <button class="text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-gray-300">
+                                        <i class="fas fa-cog mr-1"></i> Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-700/30 p-4 rounded-lg border border-gray-700 hover:border-yellow-500 transition-colors duration-200">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <h3 class="font-medium text-white">RiskManager</h3>
+                                            <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-gray-900/50 text-gray-400">IDLE</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">Portfolio protection</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-gray-400">$0.00</p>
+                                        <p class="text-xs text-gray-500 mt-1">Today</p>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <span class="text-xs px-2 py-1 rounded bg-blue-900/30 text-blue-300">BTC</span>
+                                        <span class="text-xs px-2 py-1 rounded bg-purple-900/30 text-purple-300">ETH</span>
+                                        <span class="text-xs px-2 py-1 rounded bg-green-900/30 text-green-300">SOL</span>
+                                    </div>
+                                    <button class="text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-gray-300">
+                                        <i class="fas fa-cog mr-1"></i> Configure
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full py-2 px-4 border border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-white hover:border-gray-500 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i> Deploy New Agent
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm border border-gray-700">
+                        <h2 class="text-xl font-bold text-white mb-4">Quick Actions</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-blue-600/30 hover:bg-blue-600/40 text-blue-400 py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                                <i class="fas fa-play mr-2"></i> Start All
+                            </button>
+                            <button class="bg-red-600/30 hover:bg-red-600/40 text-red-400 py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                                <i class="fas fa-stop mr-2"></i> Stop All
+                            </button>
+                            <button class="bg-purple-600/30 hover:bg-purple-600/40 text-purple-400 py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                                <i class="fas fa-sync-alt mr-2"></i> Refresh
+                            </button>
+                            <button class="bg-green-600/30 hover:bg-green-600/40 text-green-400 py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                                <i class="fas fa-wallet mr-2"></i> Deposit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Marketplace -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">Agent Marketplace</span>
+                </h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-400 sm:mt-4">
+                    Choose from our curated selection of high-performance trading agents
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Agent Card 1 -->
+                <div class="agent-card bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-colors duration-200 relative">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                <i class="fas fa-robot text-blue-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Arbitrage Master</h3>
+                                <p class="text-sm text-gray-400">Cross-exchange</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Detects price discrepancies across multiple exchanges and executes profitable arbitrage opportunities in milliseconds.
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-900/30 text-blue-300">BTC, ETH, SOL</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-green-400">Avg. ROI: 2.8%</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 82%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mb-6">
+                            <span>Success Rate</span>
+                            <span>82%</span>
+                        </div>
+                    </div>
+                    <div class="agent-overlay absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                        <button class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200">
+                            Deploy Agent <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Agent Card 2 -->
+                <div class="agent-card bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition-colors duration-200 relative">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-purple-500/10 flex items-center justify-center">
+                                <i class="fas fa-bolt text-purple-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Flash Trader</h3>
+                                <p class="text-sm text-gray-400">High-frequency</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Executes lightning-fast trades based on micro price movements and order book dynamics, optimized for low latency.
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-purple-900/30 text-purple-300">BTC, ETH</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-green-400">Avg. ROI: 1.5%</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 76%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mb-6">
+                            <span>Success Rate</span>
+                            <span>76%</span>
+                        </div>
+                    </div>
+                    <div class="agent-overlay absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                        <button class="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-200">
+                            Deploy Agent <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Agent Card 3 -->
+                <div class="agent-card bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-green-500 transition-colors duration-200 relative">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center">
+                                <i class="fas fa-chart-pie text-green-400 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Trend Rider</h3>
+                                <p class="text-sm text-gray-400">Momentum</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Identifies and rides market trends using advanced technical indicators and machine learning pattern recognition.
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-900/30 text-green-300">BTC, ETH, SOL, ADA</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-green-400">Avg. ROI: 3.2%</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mb-6">
+                            <span>Success Rate</span>
+                            <span>88%</span>
+                        </div>
+                    </div>
+                    <div class="agent-overlay absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-6">
+                        <button class="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-200">
+                            Deploy Agent <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-400 bg-blue-900/20 hover:bg-blue-900/30">
+                    Browse All Agents <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Testimonials -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm border border-gray-700">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Trusted by Traders Worldwide</span>
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">J</div>
+                            <div class="ml-4">
+                                <p class="font-medium text-white">James K.</p>
+                                <p class="text-sm text-gray-400">Professional Trader</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">
+                            "TradeSync's arbitrage agents have completely transformed my trading strategy. I'm seeing consistent profits with minimal effort."
+                        </p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold">S</div>
+                            <div class="ml-4">
+                                <p class="font-medium text-white">Sarah L.</p>
+                                <p class="text-sm text-gray-400">Crypto Investor</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">
+                            "As someone new to trading, these AI agents have been a game-changer. They trade better than I ever could manually."
+                        </p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center text-white font-bold">M</div>
+                            <div class="ml-4">
+                                <p class="font-medium text-white">Michael T.</p>
+                                <p class="text-sm text-gray-400">Hedge Fund Manager</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic">
+                            "We've deployed multiple agents across our fund with excellent results. The risk management features are particularly impressive."
+                        </p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star-half-alt text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="gradient-bg py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">Ready to Transform Your Trading?</span>
+                </h2>
+                <p class="mt-4 text-lg leading-6 text-gray-300">
+                    Join thousands of traders who are already automating their strategies with TradeSync's AI agents.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                            Start Free Trial
+                        </a>
+                    </div>
+                    <div class="ml-3 inline-flex">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-400 bg-white hover:bg-gray-50">
+                            Schedule Demo <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Product</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Agents</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">API</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Integrations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Guides</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Press</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Privacy</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Terms</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Security</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p class="mt-8 md:mt-0 text-base text-gray-400 md:order-1">
+                    &copy; 2023 TradeSync. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for the active agent status
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate live data updates
+            setInterval(() => {
+                const profitElements = document.querySelectorAll('.agent-profit');
+                profitElements.forEach(el => {
+                    const current = parseFloat(el.textContent.replace('$', '').replace(',', ''));
+                    const change = (Math.random() * 20).toFixed(2);
+                    const newValue = (current + parseFloat(change)).toFixed(2);
+                    el.textContent = '$' + newValue;
+                });
+                
+                // Update market price
+                const priceElement = document.querySelector('.market-price');
+                if (priceElement) {
+                    const current = parseFloat(priceElement.textContent.replace('$', '').replace(',', ''));
+                    const change = (Math.random() * 200 - 100).toFixed(2);
+                    const newValue = (current + parseFloat(change)).toFixed(2);
+                    priceElement.textContent = '$' + newValue;
+                }
+            }, 3000);
+            
+            // Add hover effect to agent cards
+            const agentCards = document.querySelectorAll('.agent-card');
+            agentCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.querySelector('.agent-overlay').style.opacity = '1';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.querySelector('.agent-overlay').style.opacity = '0';
+                });
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=fudencio/ai-agent" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
