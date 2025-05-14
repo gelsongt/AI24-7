@@ -41,6 +41,18 @@
         }
     </style>
 </head>
+
+<!-- Tela de Access Code de Acesso -->
+<div id="access-screen" class="fixed inset-0 bg-gray-900 flex items-center justify-center z-50">
+  <div class="bg-gray-800 p-8 rounded-lg shadow-lg text-center border border-gray-700">
+    <h2 class="text-xl text-white mb-4">Enter the access code</h2>
+    <input type="password" id="access-code" placeholder="Access Code" class="px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 mb-4 w-full">
+    <button onclick="validateAccessCode()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">Access</button>
+    <p id="access-error" class="text-red-500 mt-2 hidden">Access Code incorreto!</p>
+  </div>
+</div>
+if (input === '1234') {
+
 <body class="bg-gray-900 text-gray-100 font-sans">
     <!-- Navigation -->
     <nav class="bg-gray-800/80 backdrop-blur-md fixed w-full z-50">
@@ -205,7 +217,7 @@
                                 <div class="text-center">
                                     <i class="fas fa-chart-bar text-4xl text-blue-400 mb-2"></i>
                                     <p class="text-gray-300">Live Market Chart</p>
-                                    <p class="text-sm text-gray-500 mt-2">BTC/USD: $105,208.15 <span class="text-green-400">+2.4%</span></p>
+                                    <p class="text-sm text-gray-500 mt-2">BTC/USD: $42,856.32 <span class="text-green-400">+2.4%</span></p>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +236,7 @@
                                         <p class="text-sm font-medium text-white">ArbitrageBot-7</p>
                                         <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-green-900/50 text-green-400">LIVE</span>
                                     </div>
-                                    <p class="text-sm text-gray-400">Executed BUY order for BTC at $102,742.34</p>
+                                    <p class="text-sm text-gray-400">Executed BUY order for BTC at $42,812.34</p>
                                     <p class="text-xs text-gray-500 mt-1">2 minutes ago</p>
                                 </div>
                             </div>
@@ -703,3 +715,4 @@
         });
     </script>
 </html>
+
